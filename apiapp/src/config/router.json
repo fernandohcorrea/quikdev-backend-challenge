@@ -1,0 +1,30 @@
+{
+    "middlewares" : [
+        "app_middleware"
+    ],
+
+    "/users" : {
+
+        "middlewares" : [
+            "app_middleware2"
+        ],
+
+        "get" : {
+            "/": {
+                "controller" : "users",
+                "action" : "index",
+                "middlewares" : [
+                    "app_middleware3"
+                ]
+            }
+        },
+
+        "post" : {
+            "/": {
+                "controller" : "users",
+                "action" : "post",
+                "middlewares" : "app_middleware3"
+            }
+        }
+    }
+}

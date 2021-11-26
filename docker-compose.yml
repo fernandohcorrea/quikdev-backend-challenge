@@ -1,0 +1,60 @@
+version: "3.9"
+services:
+
+  nosqldb:
+    build:
+      context: nosqldb
+      args:
+        DK_UID: ${DK_UID}
+        DK_GID: ${DK_GID}
+    container_name: "${DK_PROJECT_NAME}-nosqldb"
+    ports:
+      - "${NOSQLDB_PORT:-27017}:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${NOSQLDB_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${NOSQLDB_INITDB_ROOT_PASSWORD}
+    volumes:
+      - "db-nosqldb-datavolume:/data/db"
+    networks:
+      - backend
+
+  apiapp:
+    build:
+      context: apiapp
+      args:
+        DK_UID: ${DK_UID}
+        DK_GID: ${DK_GID}
+    user: node
+    container_name: "${DK_PROJECT_NAME}-apiapp"
+    ports:
+      - "${APIAPP_PORT:-4000}:${APIAPP_PORT:-4000}"
+      - "9229:9229"
+    environment:
+      PORT: ${APIAPP_PORT:-4000}
+      NODE_ENV: ${DK_ENV}
+    working_dir: /application
+    restart: "on-failure"
+    volumes:
+      - apiapp-datavolume:/application
+    networks:
+      - backend
+    depends_on:
+      - nosqldb
+    command: ["yarn", "dev"]
+
+
+networks:
+  backend:
+
+volumes:
+  db-nosqldb-datavolume:
+    driver_opts:
+      o: "bind"
+      type : "none"
+      device : "${NOSQLDB_VOLUME}"
+
+  apiapp-datavolume:
+    driver_opts:
+      o: "bind"
+      type : "none"
+      device : "${PWD}/apiapp"
