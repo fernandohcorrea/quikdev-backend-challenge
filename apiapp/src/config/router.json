@@ -3,27 +3,47 @@
         "app_middleware"
     ],
 
-    "/users" : {
+    "/v1" : {
 
         "middlewares" : [
             "app_middleware2"
         ],
 
+        "post" : {
+            "/users": {
+                "controller" : "users_controller",
+                "action" : "create"
+            }
+        },
+
         "get" : {
-            "/": {
-                "controller" : "users",
-                "action" : "index",
+            "/users/:id?": {
+                "controller" : "users_controller",
+                "action" : "select",
                 "middlewares" : [
                     "app_middleware3"
                 ]
             }
         },
 
-        "post" : {
-            "/": {
-                "controller" : "users",
-                "action" : "post",
-                "middlewares" : "app_middleware3"
+        "put" : {
+            "/users/:id": {
+                "controller" : "users_controller",
+                "action" : "update"
+            }
+        },
+
+        "patch" : {
+            "/users/:id": {
+                "controller" : "users_controller",
+                "action" : "update"
+            }
+        },
+
+        "delete" : {
+            "/users/:id": {
+                "controller" : "users_controller",
+                "action" : "delete"
             }
         }
     }

@@ -3,15 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon --inspect --watch src ./bin/server",
-    "start": "node ./bin/server"
+    "dev": "yarn _pre_dev && yarn _serve_dev",
+    "start": "node ./bin/server",
+    "_pre_dev": "[[ ! -d 'node_modules' ]] && yarn install || echo 'Yarn installed'",
+    "_serve_dev": "nodemon --inspect --watch src ./bin/server"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
     "express": "~4.16.1",
-    "morgan": "~1.9.1"
+    "http-build-query": "^0.7.0",
+    "mongoose": "^6.0.13",
+    "morgan": "~1.9.1",
+    "sha256": "^0.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

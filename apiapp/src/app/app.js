@@ -1,10 +1,11 @@
-let express = require('express');
-let path = require('path');
-let cookieParser = require('cookie-parser');
-let logger = require('morgan');
-let router = require('../router');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const router = require('../router');
+const db = require('../db');
 
-let app = express();
+const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());

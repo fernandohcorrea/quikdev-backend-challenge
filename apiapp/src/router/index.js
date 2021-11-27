@@ -5,6 +5,30 @@ const middlewares = require('../middlewares');
 const router = express.Router();
 const config = require('../config/router.json');
 
+const parsePath = (path_part, config) => {
+  let dtype_path = typeof path_part;
+  if( dtype_path != 'string' ){
+    throw new Error(`Invalid path_part(${dtype_path}) datatype. String is required `);
+  }
+
+  let dtype_config = typeof config;
+  if( dtype_config != 'object' ){
+    throw new Error(`Invalid config datatype(${dtype_config}) for path ${path_part}. Object is required `);
+  }
+
+  if(config.hasOwnProperty.call(config, 'middlewares')){
+    appendMiddlewares(config['middlewares'], path_part);
+    delete(config['middlewares']);
+  }
+
+  for (const http_verb in config) {
+    if (Object.hasOwnProperty.call(config, http_verb)) {
+      const config_routes = config[http_verb];
+      parseRoute(http_verb, path_part, config_routes);
+    }
+  }
+}
+
 const appendMiddlewares = (data_middlewares, path_part=null) => {
   const dtype_middlewares = typeof data_middlewares;
   const dtype_path_part = typeof path_part;
@@ -43,6 +67,7 @@ const parseRoute = (http_verb, part_path, config_routes) => {
       const leaf_config = config_routes[last_path];
       last_path = (last_path == '/') ? '' : last_path;
       const end_path = `${part_path}${last_path}`.trim();
+      let data_middlewares = [];
       let route_middlewares = [];
       let controller = null;
       let action = 'index';
@@ -60,7 +85,7 @@ const parseRoute = (http_verb, part_path, config_routes) => {
       }
 
       if(Object.hasOwnProperty.call(leaf_config, 'middlewares')){
-        let data_middlewares = leaf_config['middlewares'];
+        data_middlewares = leaf_config['middlewares'];
         let dtype_middlewares = typeof data_middlewares;
 
         if( dtype_middlewares != 'string' && !Array.isArray(data_middlewares)){
@@ -107,29 +132,7 @@ const parseRoute = (http_verb, part_path, config_routes) => {
   }
 }
 
-const parsePath = (path_part, config) => {
-  let dtype_path = typeof path_part;
-  if( dtype_path != 'string' ){
-    throw new Error(`Invalid path_part(${dtype_path}) datatype. String is required `);
-  }
 
-  let dtype_config = typeof config;
-  if( dtype_config != 'object' ){
-    throw new Error(`Invalid config datatype(${dtype_config}) for path ${path_part}. Object is required `);
-  }
-
-  if(config.hasOwnProperty.call(config, 'middlewares')){
-    appendMiddlewares(config['middlewares'], path_part);
-    delete(config['middlewares']);
-  }
-
-  for (const http_verb in config) {
-    if (Object.hasOwnProperty.call(config, http_verb)) {
-      const config_routes = config[http_verb];
-      parseRoute(http_verb, path_part, config_routes);
-    }
-  }
-}
 
 const Router = () => {
   for (const key in config) {
