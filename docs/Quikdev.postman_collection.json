@@ -1,0 +1,596 @@
+{
+	"info": {
+		"_postman_id": "2dc84363-eb50-42d1-a0d2-3c403234954f",
+		"name": "Quikdev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Set retuned data\", function () {",
+									"       ",
+									"    if(pm.response.code != 201){",
+									"        return false",
+									"    }",
+									"        ",
+									"    ",
+									"    let jsonData = pm.response.json();",
+									"    let bearer_auth = jsonData.token;",
+									"    ",
+									"    pm.environment.set(\"auth_token\", bearer_auth);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"fernandohcorrea\",\n  \"password\": \"super_senha_secreta\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Exemplo de login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"quikdev\",\n  \"password\": \"super_senha_secreta\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "197"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c5-fS0CFC5FOJn/wC3aFeZT06tcPCQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Nov 2021 08:08:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYTMxZTk1Nzc3OTAwNmFhMGQ5NzRmZSIsImlhdCI6MTYzODA4NjkzMCwiZXhwIjoxNjM4MDk0MTMwfQ.rDC9wihso7K96M6ZtFDOGfIifCusrkRaH0u8VEKk7lY\",\n    \"status\": \"OK\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Fernando H Correa\",\n  \"username\": \"fernandohcorrea\",\n  \"password\": \"super_senha_secreta\",\n  \"birthdate\": \"1981-05-05\",\n  \"address\":\"Rua fake\",\n  \"addressNumber\": \"99\",\n  \"primaryPhone\": \"11 987654321\",\n  \"description\": \"Observações\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Não requer autenticação."
+					},
+					"response": [
+						{
+							"name": "Criando Usuário",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Fernando H Correa\",\n  \"username\": \"fernandohcorrea\",\n  \"password\": \"super_senha_secreta\",\n  \"birthdate\": \"1981-05-05\",\n  \"address\":\"Rua fake\",\n  \"addressNumber\": \"99\",\n  \"primaryPhone\": \"11 987654321\",\n  \"description\": \"Observações\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-KmHZlpxoGpZM2TFlaM+7msjqBPk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Nov 2021 16:23:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"61a3acfa5d109bc0087df783\",\n    \"status\": \"OK\"\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Fernando H Corrêa\",\n  \"birthdate\": \"1981-05-05\",\n  \"address\":\"Rua Fake - cidade - uf\",\n  \"addressNumber\": \"999\",\n  \"primaryPhone\": \"11 977664321\",\n  \"description\": \"APTO 33\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Requer autenticação."
+					},
+					"response": [
+						{
+							"name": "Editando Usuário",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Fernando H Corrêa\",\n  \"birthdate\": \"1981-05-05\",\n  \"address\":\"Rua Fake - cidade - uf\",\n  \"addressNumber\": \"999\",\n  \"primaryPhone\": \"11 977664321\",\n  \"description\": \"APTO 33\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-KmHZlpxoGpZM2TFlaM+7msjqBPk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Nov 2021 16:28:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"61a3acfa5d109bc0087df783\",\n    \"status\": \"OK\"\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Requer autenticação."
+					},
+					"response": [
+						{
+							"name": "Deletando Usuário",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/users/61a2abc57cc8f4bf5d8f5b59",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"61a2abc57cc8f4bf5d8f5b59"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-hq7+fuj0MicISMjyGcipYz1KKik\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Nov 2021 03:07:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"61a2abc57cc8f4bf5d8f5b59\",\n    \"status\": \"OK\"\n}"
+						}
+					]
+				},
+				{
+					"name": "select",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}?page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Requer autenticação."
+					},
+					"response": [
+						{
+							"name": "Selecionando Usuários com paginação",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/users/{{user_id}}?page=1&limit=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{user_id}}"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3278"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"cce-IU0uUPaUo+IEgu6ADD+16xQsJ8k\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Nov 2021 16:30:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"users\": [\n            {\n                \"_id\": \"61a2a0243834b8dc17fbb237\",\n                \"name\": \"Fernando H Corrêa\",\n                \"username\": \"fcorrea\",\n                \"birthdate\": \"1981-11-05T00:00:00.000Z\",\n                \"address\": \"Rua Guanhães - VP\",\n                \"addressNumber\": \"66\",\n                \"primaryPhone\": \"(11) 7168-7988\",\n                \"description\": \"APTO 32\",\n                \"createdAt\": \"2021-11-27T21:16:20.865Z\",\n                \"updatedAt\": \"2021-11-28T02:44:15.789Z\"\n            },\n            {\n                \"_id\": \"61a2f6a9bc742beb6e8adc9e\",\n                \"name\": \"Fernando H Correa\",\n                \"username\": \"fcorreasa\",\n                \"birthdate\": \"1981-05-05T00:00:00.000Z\",\n                \"address\": \"Rua Guanhães\",\n                \"addressNumber\": \"60\",\n                \"primaryPhone\": \"(11) 97168-7988\",\n                \"description\": \"Observações\",\n                \"createdAt\": \"2021-11-28T03:25:29.413Z\",\n                \"updatedAt\": \"2021-11-28T03:25:29.413Z\"\n            },\n            {\n                \"_id\": \"61a2f87c6b0fe9422aa9e026\",\n                \"name\": \"Fernando H Correa\",\n                \"username\": \"fcorreasasdfa\",\n                \"birthdate\": \"1981-05-05T00:00:00.000Z\",\n                \"address\": \"Rua Guanhães\",\n                \"addressNumber\": \"60\",\n                \"primaryPhone\": \"(11) 97168-7988\",\n                \"description\": \"Observações\",\n                \"createdAt\": \"2021-11-28T03:33:16.816Z\",\n                \"updatedAt\": \"2021-11-28T03:33:16.816Z\"\n            },\n            {\n                \"_id\": \"61a2f8866b0fe9422aa9e028\",\n                \"name\": \"Fernando H Correa\",\n                \"username\": \"fcorreasasasdfdfa\",\n                \"birthdate\": \"1981-05-05T00:00:00.000Z\",\n                \"address\": \"Rua Guanhães\",\n                \"addressNumber\": \"60\",\n                \"primaryPhone\": \"(11) 97168-7988\",\n                \"description\": \"Observações\",\n                \"createdAt\": \"2021-11-28T03:33:26.496Z\",\n                \"updatedAt\": \"2021-11-28T03:33:26.496Z\"\n            },\n            {\n                \"_id\": \"61a2f8886b0fe9422aa9e02a\",\n                \"name\": \"Fernando H Correa\",\n                \"username\": \"fcorreasasasdfasdfdfa\",\n                \"birthdate\": \"1981-05-05T00:00:00.000Z\",\n                \"address\": \"Rua Guanhães\",\n                \"addressNumber\": \"60\",\n                \"primaryPhone\": \"(11) 97168-7988\",\n                \"description\": \"Observações\",\n                \"createdAt\": \"2021-11-28T03:33:28.234Z\",\n                \"updatedAt\": \"2021-11-28T03:33:28.234Z\"\n            },\n            {\n                \"_id\": \"61a2f8896b0fe9422aa9e02c\",\n                \"name\": \"Fernando H Correa\",\n                \"username\": \"fcorreasasasdfasdfasdfdfa\",\n                \"birthdate\": \"1981-05-05T00:00:00.000Z\",\n                \"address\": \"Rua Guanhães\",\n                \"addressNumber\": \"60\",\n                \"primaryPhone\": \"(11) 97168-7988\",\n                \"description\": \"Observações\",\n                \"createdAt\": \"2021-11-28T03:33:29.793Z\",\n                \"updatedAt\": \"2021-11-28T03:33:29.793Z\"\n            },\n            {\n                \"_id\": \"61a2f88b6b0fe9422aa9e02e\",\n                \"name\": \"Fernando H Correa\",\n                \"username\": \"fcorreasasasdfasdfasdfsdfdfa\",\n                \"birthdate\": \"1981-05-05T00:00:00.000Z\",\n                \"address\": \"Rua Guanhães\",\n                \"addressNumber\": \"60\",\n                \"primaryPhone\": \"(11) 97168-7988\",\n                \"description\": \"Observações\",\n                \"createdAt\": \"2021-11-28T03:33:31.598Z\",\n                \"updatedAt\": \"2021-11-28T03:33:31.598Z\"\n            },\n            {\n                \"_id\": \"61a2f88d6b0fe9422aa9e030\",\n                \"name\": \"Fernando H Correa\",\n                \"username\": \"fcorreasasasdfasdfasdfsdfsddfa\",\n                \"birthdate\": \"1981-05-05T00:00:00.000Z\",\n                \"address\": \"Rua Guanhães\",\n                \"addressNumber\": \"60\",\n                \"primaryPhone\": \"(11) 97168-7988\",\n                \"description\": \"Observações\",\n                \"createdAt\": \"2021-11-28T03:33:33.676Z\",\n                \"updatedAt\": \"2021-11-28T03:33:33.676Z\"\n            },\n            {\n                \"_id\": \"61a2f8966b0fe9422aa9e032\",\n                \"name\": \"Fernando H Correa\",\n                \"username\": \"asddfa\",\n                \"birthdate\": \"1981-05-05T00:00:00.000Z\",\n                \"address\": \"Rua Guanhães\",\n                \"addressNumber\": \"60\",\n                \"primaryPhone\": \"(11) 97168-7988\",\n                \"description\": \"Observações\",\n                \"createdAt\": \"2021-11-28T03:33:42.171Z\",\n                \"updatedAt\": \"2021-11-28T03:33:42.171Z\"\n            },\n            {\n                \"_id\": \"61a2f8976b0fe9422aa9e034\",\n                \"name\": \"Fernando H Correa\",\n                \"username\": \"asdadfa\",\n                \"birthdate\": \"1981-05-05T00:00:00.000Z\",\n                \"address\": \"Rua Guanhães\",\n                \"addressNumber\": \"60\",\n                \"primaryPhone\": \"(11) 97168-7988\",\n                \"description\": \"Observações\",\n                \"createdAt\": \"2021-11-28T03:33:43.818Z\",\n                \"updatedAt\": \"2021-11-28T03:33:43.818Z\"\n            }\n        ],\n        \"total\": 41,\n        \"count\": 10,\n        \"page\": 1,\n        \"pages\": 5,\n        \"limit\": 10\n    },\n    \"status\": \"OK\"\n}"
+						},
+						{
+							"name": "Selecionando Usuário",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{user_id}}"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "347"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"15b-oarDwzSH1ZyPCOrN2u4w1VxApRY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 28 Nov 2021 16:32:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"_id\": \"61a3acfa5d109bc0087df783\",\n            \"name\": \"Fernando H Corrêa\",\n            \"username\": \"fernandohcorrea\",\n            \"birthdate\": \"1981-05-05T00:00:00.000Z\",\n            \"address\": \"Rua Fake - cidade - uf\",\n            \"addressNumber\": \"999\",\n            \"primaryPhone\": \"(11) 97766-4321\",\n            \"description\": \"APTO 33\",\n            \"createdAt\": \"2021-11-28T16:23:22.034Z\",\n            \"updatedAt\": \"2021-11-28T16:28:36.125Z\"\n        }\n    ],\n    \"status\": \"OK\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:4000"
+		}
+	]
+}
