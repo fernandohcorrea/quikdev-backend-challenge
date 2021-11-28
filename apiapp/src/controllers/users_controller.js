@@ -1,57 +1,82 @@
 const UsersServices = require('../services/users_services')
 
-
-
+/**
+ * Users Controller
+ * @returns object
+ */
 const UsersController = () => {
   return {
 
-
-    "create" : async function(req, res) {
-      if(!req.body || !Object.keys(req.body).length){
-        return res.status(403).json({
-          message: 'Invalid request data',
-          status: 'NOK'
-        });
-      }
-
+    "create" : async function(req, res)
+    {
       UsersServices.createUser(req.body)
         .then((user) => {
           res.status(201).json({
-            id: user._id
+            id: user._id,
+            status: 'OK'
           }).end();
         })
         .catch((error) => {
           res.status(400).json({
             message : error.message,
+            status: 'NOK',
             error
           }).end();
         });
-
     },
 
-    "select" : async function(req, resp) {
-
-      let filters = req.query;
-
-      // const conn = mongoose.connect('mongodb://root:rootpass@localhost:27017/quickdev?authSource=admin&readPreference=primary&appname=mongodb-vscode%200.6.14&ssl=false');
-      
-      // const user = new  User({
-      //   name: "Fernando H Corrêa"
-      // });
-
-      // user.save();
-
-      resp.status(200).json(req.query).end();
+    "select" : async function(req, res) {
+      UsersServices.selectUser(req.params.id, req.query)
+      .then((data) => {
+        res.status(200).json({
+          data,
+          status: 'OK'
+        }).end();
+      })
+      .catch((error) => {
+        res.status(400).json({
+          message : error.message,
+          status: 'NOK',
+          error
+        }).end();
+      });
     },
 
-    "update" : function(req, res) {
-      res.json(['Post']);
+    "update" : async function(req, res)
+    {
+      UsersServices.updateUser(req.params.id, req.body)
+        .then((user) => {
+          res.status(200).json({
+            id: user._id,
+            status: 'OK'
+          }).end();
+        })
+        .catch((error) => {
+          res.status(400).json({
+            message : error.message,
+            status: 'NOK',
+            error
+          }).end();
+        });
     },
 
-    "delete" : function(req, res) {
-      res.json(['Post']);
+    "delete" : async function(req, res)
+    {
+      UsersServices.deleteUser(req.params.id)
+        .then(() => {
+          res.status(200).json({
+            id: req.params.id,
+            status: 'OK'
+          }).end();
+        })
+        .catch((error) => {
+          res.status(400).json({
+            message : error.message,
+            status: 'NOK',
+            error
+          }).end();
+        });
     }
-    
   }
 
 };

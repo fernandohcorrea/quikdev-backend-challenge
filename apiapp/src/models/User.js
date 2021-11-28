@@ -35,6 +35,11 @@ const UsersSchema = new Schema({
   "description": String,
   "createdAt": { type: Date, default: Date.now },
   "updatedAt": { type: Date, default: Date.now }
+},{
+  timestamps: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
 });
 
 const User = mongoose.model("User", UsersSchema, 'users');

@@ -21,7 +21,7 @@
                 "controller" : "users_controller",
                 "action" : "select",
                 "middlewares" : [
-                    "app_middleware3"
+                    "auth_middleware"
                 ]
             }
         },
@@ -29,21 +29,30 @@
         "put" : {
             "/users/:id": {
                 "controller" : "users_controller",
-                "action" : "update"
+                "action" : "update",
+                "middlewares" : [
+                    "auth_middleware"
+                ]
             }
         },
 
         "patch" : {
             "/users/:id": {
                 "controller" : "users_controller",
-                "action" : "update"
+                "action" : "update",
+                "middlewares" : [
+                    "auth_middleware"
+                ]
             }
         },
 
         "delete" : {
             "/users/:id": {
                 "controller" : "users_controller",
-                "action" : "delete"
+                "action" : "delete",
+                "middlewares" : [
+                    "auth_middleware"
+                ]
             }
         }
     }
