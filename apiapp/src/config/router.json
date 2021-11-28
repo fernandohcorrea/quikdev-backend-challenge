@@ -13,6 +13,10 @@
             "/users": {
                 "controller" : "users_controller",
                 "action" : "create"
+            },
+            "/auth/login": {
+                "controller" : "login_controller",
+                "action" : "login"
             }
         },
 

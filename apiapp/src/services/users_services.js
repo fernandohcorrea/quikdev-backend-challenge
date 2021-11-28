@@ -11,17 +11,17 @@ const createUser = async (user_data) => {
     return new Promise(async(res, rej) => {
 
         if(typeof user_data != 'object' || !Object.keys(user_data).length ){
-            rej("Invalid user data");
+            return rej("Invalid user data");
         }
 
         user_data.password = await parsePassword(user_data.password);
         if(!user_data.password){
-            rej("Invalid password, please try another stronger password");
+            return rej("Invalid password, please try another stronger password");
         }
 
         user_data.primaryPhone = parsePhone(user_data.primaryPhone);
         if(!user_data.primaryPhone){
-            rej("Invalid primaryPhone format");
+            return rej("Invalid primaryPhone format");
         }
         const user = new User(user_data);
 
@@ -45,20 +45,20 @@ const updateUser = async (id, user_data) => {
     return new Promise(async(res,rej) => {
 
         if(typeof user_data != 'object' || !Object.keys(user_data).length ){
-            rej("Invalid user data");
+            return rej("Invalid user data");
         }
 
         if(user_data.password){
             user_data.password = await parsePassword(user_data.password);
             if(!user_data.password){
-                rej("Invalid password, please try another stronger password");
+                return rej("Invalid password, please try another stronger password");
             }
         }
 
         if(user_data.primaryPhone){
             user_data.primaryPhone = parsePhone(user_data.primaryPhone);
             if(!user_data.primaryPhone){
-                rej("Invalid primaryPhone format");
+                return rej("Invalid primaryPhone format");
             }
         }
 
