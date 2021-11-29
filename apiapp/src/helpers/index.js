@@ -44,6 +44,10 @@ const parsePassword = async (password_plain_text) => {
  * @returns string | false
  */
 const parsePhone = (phone_number) => {
+    if(!phone_number){
+        return false;
+    }
+    
     phone_number = String(phone_number);
     phone_number = phone_number.match( /\d+/ig ).join('');
     if(phone_number.length < 10 || phone_number.length > 11){
