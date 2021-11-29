@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "yarn _pre_dev && yarn _serve_dev",
     "start": "node ./bin/server",
+    "test": "mocha --exit",
     "_pre_dev": "[[ ! -d 'node_modules' ]] && yarn install || echo 'Yarn installed'",
     "_serve_dev": "nodemon --inspect --watch src ./bin/server"
   },
@@ -21,6 +22,9 @@
     "sha256": "^0.2.0"
   },
   "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^9.1.3",
     "nodemon": "^2.0.15"
   }
 }

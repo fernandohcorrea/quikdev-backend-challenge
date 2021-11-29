@@ -19,6 +19,10 @@ required_config.forEach(key => {
     mongo_config[key] = process.env[key];
 });
 
+if(process.env.NODE_ENV == 'test'){
+    mongo_config.MONGO_DB_DATABASE += '-test'
+}
+
 const query_params = {
     authSource: process.env['MONGO_DB_AUTH_SOURCE'] || 'admin',
     readPreference: process.env['MONGO_DB_READ_PREFERENCE'] || 'primary',
